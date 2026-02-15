@@ -10,28 +10,25 @@
  * }
  */
 public class Solution {
+    private ListNode s = null;
     public ListNode RemoveNthFromEnd(ListNode head, int n) {
-        return Travers(head,n,head);
+        return Traverse(head,n);
     }
-    int k = 1;
-    private ListNode Travers(ListNode temp, int n,ListNode prev = null)
+    int k = 0;
+    private ListNode Traverse(ListNode node, int n)
     {
-        if(temp.next != null)
+        if (node == null) 
         {
-            Travers(temp.next,n,temp);
-            if(k == n)
-            {
-                k++;
-                prev.next = temp.next;
-            }
-            return temp;
+            return null;
         }
-        if(k == n)
-        {
-            prev.next = null;
-        }
+
+        node.next = Traverse(node.next, n);
         k++;
-        return null;;
-        
+
+        if (k == n)
+        {
+            return node.next; 
+        }
+        return node;
     }
 }
